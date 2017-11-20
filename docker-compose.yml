@@ -3,9 +3,8 @@ version: '2'
 services:
   drone-server:
     image: drone/drone:0.8
-
     ports:
-      - 80:8000
+      - 8010:8000
       - 9000
     volumes:
       - ./drone:/var/lib/drone/
@@ -13,6 +12,8 @@ services:
     environment:
       - DRONE_OPEN=true
       - DRONE_HOST=${DRONE_HOST}
+      - DRONE_ORGS=dalapatiinc
+      - DRONE_ADMIN=dineshalapati
       - DRONE_GITHUB=true
       - DRONE_GITHUB_CLIENT=${DRONE_GITHUB_CLIENT}
       - DRONE_GITHUB_SECRET=${DRONE_GITHUB_SECRET}
@@ -20,7 +21,6 @@ services:
 
   drone-agent:
     image: drone/agent:0.8
-
     command: agent
     restart: always
     depends_on:
